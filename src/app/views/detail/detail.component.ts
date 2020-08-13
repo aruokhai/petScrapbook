@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewContainerRef } from "@angular/core";
 import { Page } from "../../models/page";
 import { RouterExtensions } from "@nativescript/angular/router";           
-import { NavigationOptions } from "@nativescript/angular/router/ns-location-strategy";
+import { NavigationOptions, NSLocationStrategy } from "@nativescript/angular/router/ns-location-strategy";
 import { PageService } from "../../services/page.service";
 import { ModalDialogService, ModalDialogOptions }  
   from "@nativescript/angular/modal-dialog";        
@@ -26,7 +26,7 @@ export class DetailComponent implements OnInit {
     private pageService: PageService,
     private route: ActivatedRoute,
     private modalService: ModalDialogService,              
-    private viewContainerRef: ViewContainerRef) { }  
+    private viewContainerRef: ViewContainerRef, private nsLocationStrategy: NSLocationStrategy) { }  
 
   ngOnInit(): void {                                      
     let id:number;                                        
@@ -39,11 +39,10 @@ export class DetailComponent implements OnInit {
 
   onDoneTap(): void {                          
     this.pageService.savePage(this.page);  
-
     var options = <NavigationOptions>{
       clearHistory: true
     };
-    this.routerExtensions.navigate(["list"], options);
+    this.routerExtensions.navigate(["list"], options)
   }
 
   onBirthDateTap(): void {

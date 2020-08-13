@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Page } from "../../models/page";
 import { RouterExtensions } from "@nativescript/angular/router";
-import { NavigationOptions } from "@nativescript/angular/router/ns-location-strategy"; // #A
+import { NavigationOptions, NSLocationStrategy } from "@nativescript/angular/router/ns-location-strategy"; // #A
 import { PageService } from "../../services/page.service";
 import { ItemEventData } from "@nativescript/core/ui/list-view";
 
@@ -16,16 +16,21 @@ export class ListComponent implements OnInit {
 
   constructor(
     private routerExtensions: RouterExtensions, 
-    private pageService: PageService) { }
+    private pageService: PageService,private nsLocationStrategy: NSLocationStrategy) { }
 
   ngOnInit(): void {
-    console.log("ello ")
+    this.nsLocationStrategy.replaceState(null,null , "home", null);
+    this.nsLocationStrategy.pushState(null,null , "home", null);
+
+    console.log(
+      "called oninit"
+    )
     this.pages = this.pageService.getPages();
   }
 
   onAddTap(): void {
     let options: NavigationOptions = { 
-      clearHistory: true               
+      clearHistory: true             
     };                                 
     
     this.routerExtensions.navigate(
@@ -34,9 +39,13 @@ export class ListComponent implements OnInit {
   }
 
   onItemTap(args: ItemEventData): void {
-    let id = args.index;
-        
-    this.routerExtensions.navigate(["detail", id]);
+    let options: NavigationOptions = { 
+      clearHistory: true             
+    };
+    let id = args.index;      
+    this.routerExtensions.navigate(["detail", id],options);
   }
+
+
 
 }

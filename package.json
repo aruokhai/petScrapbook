@@ -1,6 +1,6 @@
 {
   "nativescript": {
-    "id": "org.nativescript.helloAngular",
+    "id": "org.nativescript.petScrapbook",
     "tns-android": {
       "version": "6.5.0"
     },

@@ -3,8 +3,6 @@ import { NativeScriptModule } from "@nativescript/angular";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { ItemsComponent } from "./item/items.component";
-import { ItemDetailComponent } from "./item/item-detail.component";
 
 import {DetailModule} from "./views/detail/detail.module";
 import {ListModule} from "./views/list/list.module";
@@ -34,8 +32,6 @@ import { PageService } from "./services/page.service";
     ],
     declarations: [
         AppComponent,
-        ItemsComponent,
-        ItemDetailComponent,
         HomeComponent,
         AboutComponent
     ],
